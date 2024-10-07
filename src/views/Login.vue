@@ -32,7 +32,6 @@
     {
       await signUp({id: idUser.value, password: password.value});
       msg.value = 'Inscription reussie';
-  
     }
     catch (error)
     {
@@ -41,15 +40,17 @@
   };
   
   const loginIn = async () => {
-    try
-    {
-      await login({id: idUser.value, password: password.value});
-      msg.value = 'Connexion reussie';
-      router.push('/home');
-    }
-    catch (error)
-    {
-      msg.value = "error";
-    }
+      login({id: idUser.value, password: password.value})
+        .then((res) => {
+            if (res.token) {
+                localStorage.setItem("token", JSON.stringify(res.token));
+                console.log(res.token);               
+                msg.value = 'Connexion reussie';
+                router.push('/home');
+            }
+            return res.token;
+        }).catch((error) => {
+            msg.value = 'Connexion echouée';
+        });
   }
   </script>
