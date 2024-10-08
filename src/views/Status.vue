@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import TopBar from '../components/TopBar.vue';
+import TopBar from '@/components/TopBar.vue';
 </script>
 
 <template>
     <TopBar></TopBar>
     <div class="flex flex-column align-items-center justify-content-center gap-4 h-15rem">
-        <h2>Home</h2>
+        <h2>Status</h2>
     </div>
 </template>
