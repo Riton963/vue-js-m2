@@ -22,7 +22,7 @@ export default function useWorkFlow(): {
     };
 
     const initWorkFlows = async (): Promise<void> => {
-        workFlows.value = await getWorkFlows()    
+        workFlows.value = await getWorkFlows()
     }
 
 

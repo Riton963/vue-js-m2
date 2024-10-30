@@ -1,4 +1,5 @@
 export interface WorkFlowsType {
+    id?: number;
     name: string;
     data_source: string;
     steps: {
