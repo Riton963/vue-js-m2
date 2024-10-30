@@ -1,11 +1,16 @@
-import { ref, type Ref } from "vue";
+import { getWorkFlows } from "@/services/workFlows";
+import type { WorkFlowsType } from "@/types/workflowsType";
+import { reactive, ref, type Ref } from "vue";
+const workFlows = ref<WorkFlowsType[]>([]);
+
 
 const createWorkFlowModal = ref<boolean>(false)
-
 export default function useWorkFlow(): {
     openCreateWorkFlowModal: () => void,
     closeCreateWorkFlowModal: () => void,
-    createWorkFlowModal: Ref<boolean>
+    createWorkFlowModal: Ref<boolean>,
+    initWorkFlows: () => void,
+    workFlows: Ref<WorkFlowsType[]>
 } {
 
     const openCreateWorkFlowModal = (): void => {
@@ -16,9 +21,16 @@ export default function useWorkFlow(): {
         createWorkFlowModal.value = false
     };
 
+    const initWorkFlows = async (): Promise<void> => {
+        workFlows.value = await getWorkFlows()    
+    }
+
+
     return {
         openCreateWorkFlowModal,
         closeCreateWorkFlowModal,
-        createWorkFlowModal
+        createWorkFlowModal,
+        initWorkFlows,
+        workFlows
     }
 }

@@ -1,25 +1,30 @@
 <script setup lang="ts">
-import type { WorkFlowsType } from '@/types/workflowsType';
 import TopBar from '../components/TopBar.vue';
-import { createWorkFlow } from '@/services/workFlows';
 import CreateWorkFlow from '@/components/Modals/createWorkFlow.vue';
 import useWorkFlow from '@/composables/useWorkFlow';
+import Button from 'primevue/button';
+import { ref } from 'vue';
 
 const { openCreateWorkFlowModal } = useWorkFlow();
 
-const handleCreateWorkFlow = () => {
-    openCreateWorkFlowModal()
-}
+const showLaTeteDeYann = ref<boolean>(false);
 
+const timeOut = () => {
+    showLaTeteDeYann.value = true;
+    setTimeout(function() {
+        showLaTeteDeYann.value = false;
+        }, 2000); 
+}
+    
 </script>
 
 <template>
     <TopBar></TopBar>
-    <div class="flex flex-column align-items-center justify-content-center gap-4 h-15rem">
-        <h2>Home</h2>
-        <div class="bg-primary cursor-pointer" @click="handleCreateWorkFlow()">
-            <div>Création d'un WorkFlows</div>
-        </div>
+    <div class="flex flex-column align-items-center justify-content-center gap-4">
+        <Button label="Création d'un workFlows" @click="openCreateWorkFlowModal()"></Button>
+        <Button label="TimeOut" @click="timeOut()"></Button>
+        <img v-if="showLaTeteDeYann" src="../assets/yann.png" alt="">
     </div>
     <CreateWorkFlow />
+
 </template>
